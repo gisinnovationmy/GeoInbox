@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture — GeoInbox Documentation</title>
+    <meta name="description" content="How the GeoInbox QGIS plugin is organised: tabs, storage, and background tasks.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> &gt; Architecture
+        </div>
+        <div class="page-header">
+            <h1>Plugin layout</h1>
+            <p>A short map of how GeoInbox fits together inside QGIS — useful when you need to know where settings live or why the UI stays responsive during downloads.</p>
+        </div>
+        <div class="content">
+            <section>
+                <h2>Main panel tabs</h2>
+                <table class="format-table">
+                    <thead><tr><th>Area</th><th>Purpose</th></tr></thead>
+                    <tbody>
+                        <tr><td>Email browser</td><td>IMAP/POP3 mail, attachments, trust prompts</td></tr>
+                        <tr><td>Versioning</td><td>Client vs host compare, diff layers, commit</td></tr>
+                        <tr><td>GISimple</td><td>Server login, group datasets, sync files</td></tr>
+                        <tr><td>Geov Format</td><td>Import/export <code>.geov</code> packages (<a href="13-geov-minigisimple.html">MiniGISimple</a>)</td></tr>
+                        <tr><td>Settings</td><td>Download folder, trust, cache, advanced options</td></tr>
+                        <tr><td>Documentation</td><td>Opens this HTML manual in your browser</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Local storage</h2>
+                <ul>
+                    <li><strong>config.db</strong> — SQLite in the plugin folder: servers, trust lists, cache metadata.</li>
+                    <li><strong>Download folder</strong> — attachments, GISimple cache, Geov extracts, commit backups (see <a href="10-settings.html">Settings</a>).</li>
+                    <li><strong>QGIS Credential Manager</strong> — passwords and tokens, not plain text in project files.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Background work</h2>
+                <p>Network calls (mail, GISimple API, large downloads) run as <strong>QgsTask</strong> jobs so the QGIS interface does not freeze. Progress and cancel appear in the panel and QGIS task manager.</p>
+            </section>
+            <section>
+                <h2>Two operating modes</h2>
+                <div class="note">
+                    <p><strong>GISimple user</strong> — authenticate through your GISimple server (Keycloak is handled server-side; the plugin uses issued tokens).</p>
+                    <p><strong>Standalone user</strong> — configure IMAP/POP3 directly in Settings without GISimple.</p>
+                </div>
+            </section>
+            <div class="nav-buttons">
+                <a href="08-connectors.html" class="nav-button prev">← Host connectors</a>
+                <a href="10-settings.html" class="nav-button next">Settings →</a>
+            </div>
+        </div>
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to top">↑</a>
+    <script>
+        window.addEventListener('scroll', function() {
+            var el = document.getElementById('backToTop');
+            if (window.scrollY > 300) el.classList.add('visible'); else el.classList.remove('visible');
+        });
+    </script>
+</body>
+</html>

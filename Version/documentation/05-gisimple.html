@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Files from GISimple - GeoInbox Documentation</title>
+    <meta name="description" content="Connect to GISimple server, browse group datasets, and download GIS files for versioning.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> > Load Files from GISimple
+        </div>
+        
+        <div class="page-header">
+            <h1>Load Files from GISimple</h1>
+            <p>Connect to GISimple server, browse group datasets, and download GIS files for versioning.</p>
+        </div>
+        
+        <div class="content">
+            <div class="note">
+                <h3>🌐 GISimple Integration</h3>
+                <p>GISimple is a geospatial data management platform. GeoInbox integrates with GISimple to allow downloading datasets shared within your organization's groups.</p>
+            </div>
+
+            <section>
+                <h2>Connecting to GISimple</h2>
+                <div class="step-box">
+                    <h4>Step 1: Add GISimple Server</h4>
+                    <p>Go to <strong>Settings → GISimple Servers</strong> and click <strong>Add Server</strong>. Enter the server URL, Keycloak realm, client ID, and your credentials.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 2: Login</h4>
+                    <p>Select your GISimple server from the dropdown and click <strong>Login</strong>. GeoInbox authenticates via Keycloak OpenID Connect.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 3: Browse Groups</h4>
+                    <p>After successful login, your Keycloak groups will appear. Select a group to view its shared datasets.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Browsing Datasets</h2>
+                <p>Once connected, the GISimple panel shows:</p>
+                <ul>
+                    <li><strong>Groups List</strong> — Your Keycloak groups with access to GISimple datasets</li>
+                    <li><strong>Datasets List</strong> — Files shared within the selected group</li>
+                    <li><strong>File Details</strong> — Name, size, upload date, and uploader information</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Downloading Files</h2>
+                <div class="step-box">
+                    <h4>Step 1: Select Dataset</h4>
+                    <p>Click on a dataset in the list to select it.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 2: Download</h4>
+                    <p>Click <strong>Download</strong> to save the file to your configured download folder, or <strong>Download + Open in QGIS</strong> to add the layer immediately.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 3: Use for Versioning</h4>
+                    <p>Downloaded files can be used as the <strong>Client Layer</strong> in the Data Versioning tab to compare against your host database.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Supported File Formats</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>Extension</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GeoJSON</td>
+                            <td>.geojson, .json</td>
+                            <td>Recommended for versioning</td>
+                        </tr>
+                        <tr>
+                            <td>GeoPackage</td>
+                            <td>.gpkg</td>
+                            <td>Full support with transactions</td>
+                        </tr>
+                        <tr>
+                            <td>Shapefile</td>
+                            <td>.shp (in ZIP)</td>
+                            <td>Read-only support</td>
+                        </tr>
+                        <tr>
+                            <td>KML</td>
+                            <td>.kml</td>
+                            <td>Basic support</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Auto-Trust from GISimple</h2>
+                <p>Users who share files through GISimple groups can be automatically added to your trusted accounts list. This allows their email attachments to be downloaded without confirmation prompts.</p>
+                <p>To import trusted accounts from GISimple, go to <strong>Settings → Trust Settings</strong> and click <strong>Import from GISimple</strong>.</p>
+            </section>
+
+            <section>
+                <h2>Authentication</h2>
+                <p>GISimple uses Keycloak for authentication. Your credentials are:</p>
+                <ul>
+                    <li><strong>Stored securely</strong> in the QGIS Credential Manager (encrypted)</li>
+                    <li><strong>Token-based</strong> — Access tokens are refreshed automatically</li>
+                    <li><strong>Session-based</strong> — You remain logged in until you disconnect or close QGIS</li>
+                </ul>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="03-email-browser.html" class="nav-button prev">← Retrieve Attachment from Email</a>
+                <a href="13-geov-minigisimple.html" class="nav-button next">Geov Format &amp; MiniGISimple →</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

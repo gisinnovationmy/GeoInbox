@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diff layers — GeoInbox Documentation</title>
+    <meta name="description" content="Colour-coded temporary QGIS layers that show versioning comparison results.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> &gt; <a href="04-versioning.html">Data Versioning</a> &gt; Diff layers
+        </div>
+
+        <div class="page-header">
+            <h1>Diff layers</h1>
+            <p>After you compare a <strong>client</strong> layer to a <strong>host</strong> database, GeoInbox can draw every change as temporary map layers so you can see additions, deletions, and edits before you commit.</p>
+        </div>
+
+        <div class="content">
+            <div class="note">
+                <h3>Where to find the controls</h3>
+                <p>Open the <strong>Versioning</strong> tab in GeoInbox. Run <strong>Compare</strong>, then use <strong>Show All Differences</strong> to add diff layers to the map. Use <strong>Remove Temporary Layers</strong> when you are finished reviewing.</p>
+            </div>
+
+            <section>
+                <h2>Summary diff layers (four main types)</h2>
+                <p>These layers group features by change type. They are added to your QGIS project under names such as <code>[Diff] … (GeoInbox)</code>.</p>
+                <table class="format-table">
+                    <thead>
+                        <tr><th>Change</th><th>Meaning</th><th>Typical colour</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Features added</td><td>In client, not in host</td><td>Green</td></tr>
+                        <tr><td>Features deleted</td><td>In host, missing from client</td><td>Red / pink</td></tr>
+                        <tr><td>Attributes changed</td><td>Same match, different field values</td><td>Yellow / cyan tint</td></tr>
+                        <tr><td>Geometry modified</td><td>Same match, different shape</td><td>Pastel orange</td></tr>
+                    </tbody>
+                </table>
+                <p>Enable <strong>Show differences when finished</strong> in comparison settings to open these automatically after compare completes.</p>
+            </section>
+
+            <section>
+                <h2>Detailed geometry overlay (Show All Differences)</h2>
+                <p><strong>Show All Differences</strong> builds a fuller picture for matched pairs, including:</p>
+                <ul>
+                    <li><strong>Client unchanged</strong> — context (grey)</li>
+                    <li><strong>Attributes changed</strong> — attribute-only edits</li>
+                    <li><strong>Geometry moved</strong> — shape changed (pastel orange)</li>
+                    <li><strong>Both changed</strong> — geometry and attributes</li>
+                    <li><strong>Geom removed parts</strong> — portions removed from the old shape (red)</li>
+                    <li><strong>Geom added parts</strong> — portions added in the new shape (teal)</li>
+                    <li><strong>Displacement arrows</strong> — line showing movement between old and new position</li>
+                    <li><strong>Client added features</strong> — new features (bright green)</li>
+                    <li><strong>Host deleted features</strong> — features only on host (light red)</li>
+                </ul>
+                <p>Layers are memory layers: they do not change your host database until you explicitly commit.</p>
+            </section>
+
+            <section>
+                <h2>Inspecting a single feature</h2>
+                <div class="step-box">
+                    <h4>Host table and attribute diff</h4>
+                    <p>In the versioning panel, the host feature table lists match status per row. Select a row to highlight the pair on the map. When attributes differ, GeoInbox can open an <strong>Attribute Differences</strong> dialog listing field-by-field changes (and schema mismatches if field names or types differ).</p>
+                </div>
+                <div class="step-box">
+                    <h4>Geometry overlay for one pair</h4>
+                    <p>For a selected matched pair with geometry changes, GeoInbox can show a temporary overlay of old vs new geometry on the canvas (cleared when you pick another feature or remove temporary layers).</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Comparison options that affect diff output</h2>
+                <ul>
+                    <li><strong>Report geometry differences</strong> — include shape changes in results.</li>
+                    <li><strong>Report attribute differences</strong> — include field value changes.</li>
+                    <li><strong>Treat empty strings as null</strong> — reduces false attribute diffs.</li>
+                    <li><strong>Ignored fields</strong> — comma-separated list excluded from attribute comparison (e.g. audit timestamps).</li>
+                </ul>
+                <p>See <a href="04-versioning.html">Data versioning</a> for matching rules, commit, backup, and undo.</p>
+            </section>
+
+            <section>
+                <h2>Cleaning up</h2>
+                <p>Click <strong>Remove Temporary Layers</strong> to remove GeoInbox diff and overlay layers from the project. This does not undo a commit you already applied to the host — it only clears the visual review layers.</p>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="04-versioning.html" class="nav-button prev">← Data versioning</a>
+                <a href="07-security.html" class="nav-button next">Security &amp; trust →</a>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to top">↑</a>
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) backToTop.classList.add('visible');
+            else backToTop.classList.remove('visible');
+        });
+    </script>
+</body>
+</html>

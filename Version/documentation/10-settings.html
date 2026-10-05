@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - GeoInbox Documentation</title>
+    <meta name="description" content="Configure plugin settings, download folders, and advanced options for GeoInbox.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> > Settings
+        </div>
+        
+        <div class="page-header">
+            <h1>Settings</h1>
+            <p>Configure plugin settings, download folders, and advanced options for optimal GeoInbox performance.</p>
+        </div>
+        
+        <div class="content">
+            <section>
+                <h2>General Settings</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Setting</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Download Folder</td>
+                            <td>&lt;User Documents&gt;/GeoInbox</td>
+                            <td>Directory where email attachments, GISimple files, and Geov imports are saved (required for <a href="13-geov-minigisimple.html">Geov Format</a> import)</td>
+                        </tr>
+                        <tr>
+                            <td>Auto-mark as read</td>
+                            <td>Enabled</td>
+                            <td>Automatically mark emails as read when attachments are downloaded</td>
+                        </tr>
+                        <tr>
+                            <td>Open in QGIS after download</td>
+                            <td>Ask</td>
+                            <td>Behavior when downloading GIS files: Always, Never, or Ask</td>
+                        </tr>
+                        <tr>
+                            <td>Backup before commit</td>
+                            <td>Enabled</td>
+                            <td>Create automatic backups before modifying host databases</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Email Server Configuration</h2>
+                <div class="step-box">
+                    <h4>Adding a new server</h4>
+                    <p>Click "Add Server" in the Settings → Servers tab to configure a new email connection.</p>
+                </div>
+                
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Server Name</td>
+                            <td>Yes</td>
+                            <td>Friendly name for this server configuration</td>
+                        </tr>
+                        <tr>
+                            <td>Host</td>
+                            <td>Yes</td>
+                            <td>IMAP/POP3 server hostname (e.g., imap.gmail.com)</td>
+                        </tr>
+                        <tr>
+                            <td>Port</td>
+                            <td>Yes</td>
+                            <td>Server port (993 for IMAP SSL, 995 for POP3 SSL)</td>
+                        </tr>
+                        <tr>
+                            <td>Protocol</td>
+                            <td>Yes</td>
+                            <td>IMAP (recommended) or POP3</td>
+                        </tr>
+                        <tr>
+                            <td>Encryption</td>
+                            <td>Yes</td>
+                            <td>SSL/TLS (recommended), STARTTLS, or None</td>
+                        </tr>
+                        <tr>
+                            <td>Username</td>
+                            <td>Yes</td>
+                            <td>Email account username</td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td>Yes</td>
+                            <td>Stored securely in QGIS Credential Manager</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Trust & Security Settings</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🔒 Trust All</h3>
+                        <p>Download attachments from any sender without confirmation. Use with caution.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>📧 Trusted Accounts</h3>
+                        <p>Specify individual email addresses that are always trusted.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🌐 Network Trusted (CIDR)</h3>
+                        <p>Trust emails from specific IP ranges or domains (e.g., company networks).</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🤝 GISimple Auto-trust</h3>
+                        <p>Automatically trust group members when using GISimple integration.</p>
+                    </div>
+                </div>
+                
+                <div class="warning">
+                    <h3>⚠️ Security considerations</h3>
+                    <p>Always review trust settings carefully. Untrusted attachments could contain malicious data or compromise your GIS projects. When in doubt, manually verify the sender before downloading.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Cache Settings</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Setting</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Message cache TTL</td>
+                            <td>24 hours</td>
+                            <td>How long to keep email headers in local cache</td>
+                        </tr>
+                        <tr>
+                            <td>Max cache size</td>
+                            <td>100 MB</td>
+                            <td>Maximum size of the local message cache</td>
+                        </tr>
+                        <tr>
+                            <td>Auto-cleanup</td>
+                            <td>Enabled</td>
+                            <td>Automatically remove old cache entries</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="step-box">
+                    <h4>Clearing the cache</h4>
+                    <p>Click "Clear Cache" to force a fresh fetch of all message headers on next connection. This may take longer but ensures you see the latest emails.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Advanced Options</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Setting</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Connection timeout</td>
+                            <td>30 seconds</td>
+                            <td>Maximum time to wait for server connections</td>
+                        </tr>
+                        <tr>
+                            <td>Max concurrent downloads</td>
+                            <td>3</td>
+                            <td>Number of simultaneous attachment downloads</td>
+                        </tr>
+                        <tr>
+                            <td>Debug logging</td>
+                            <td>Disabled</td>
+                            <td>Enable detailed logging for troubleshooting</td>
+                        </tr>
+                        <tr>
+                            <td>Geometry tolerance</td>
+                            <td>0.001</td>
+                            <td>Tolerance for geometry comparison in versioning</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Data Storage Locations</h2>
+                <pre><code># Plugin configuration
+&lt;QGIS_PROFILE&gt;/python/plugins/geoinbox/config.db
+
+# Downloaded attachments
+&lt;Download Folder&gt;/email_attachments/
+  └── &lt;sender&gt;/
+      └── &lt;date&gt;_&lt;message_id&gt;/
+
+# GISimple cache
+&lt;Download Folder&gt;/gisimple_cache/
+  └── &lt;server&gt;/
+      └── &lt;group&gt;/
+
+# Backup files
+&lt;Download Folder&gt;/backups/
+  └── &lt;timestamp&gt;_&lt;operation&gt;.geojson
+
+# Geov Format imports
+&lt;Download Folder&gt;/geov/
+  └── &lt;project&gt;_&lt;timestamp&gt;/</code></pre>
+            </section>
+
+            <section>
+                <h2>Resetting Settings</h2>
+                <div class="warning">
+                    <h3>⚠️ Reset to defaults</h3>
+                    <p>Click "Reset All Settings" to restore default configuration. This will:</p>
+                    <ul>
+                        <li>Remove all server configurations</li>
+                        <li>Clear trust settings</li>
+                        <li>Reset download folders</li>
+                        <li>Clear message cache</li>
+                    </ul>
+                    <p><strong>This action cannot be undone.</strong> Export your settings first if you want to restore them later.</p>
+                </div>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="09-architecture.html" class="nav-button prev">← Architecture</a>
+                <a href="11-glossary.html" class="nav-button next">Glossary →</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

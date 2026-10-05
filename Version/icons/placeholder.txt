@@ -1,0 +1,7 @@
+# Icons for the GeoInbox QGIS plugin (QGIS 4 / Qt6).
+#
+# Generated from logos/geocomm2026GeoInboxIcon.png:
+#   plugin.png      - Plugin Manager / metadata icon (32x32)
+#   email.png       - Toolbar / menu (24x24)
+#   settings.png    - Toolbar / menu (24x24)
+#   versioning.png  - Toolbar / menu (24x24)

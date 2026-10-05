@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - GeoInbox Documentation</title>
+    <meta name="description" content="GeoInbox overview - Features, supported formats, and plugin phases for email-based GIS data exchange.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> > Overview
+        </div>
+        
+        <div class="page-header">
+            <h1>GeoInbox Overview</h1>
+            <p>Email-based GIS data exchange, field data versioning & merging, and seamless GISimple server integration.</p>
+        </div>
+        
+        <div class="content">
+            <div class="note">
+                <h3>💡 Two modes of operation</h3>
+                <p>GeoInbox works as a <strong>GISimple user</strong> (authenticated via GISimple server — Keycloak is completely hidden from the plugin) or as a <strong>standalone user</strong> with manual IMAP/POP3 configuration stored in a local SQLite database.</p>
+            </div>
+
+            <section>
+                <h2>What GeoInbox does</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>📧 Email Browser</h3>
+                        <p>Browse IMAP/POP3 mailboxes directly inside QGIS. Download GIS attachments (GeoJSON, GeoPackage, Shapefile, KML) with trust-based sender validation.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🔀 Data Versioning</h3>
+                        <p>Compare client datasets against a host GeoPackage or PostGIS database. Detect attribute changes, geometry modifications, added and deleted features.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🎨 Diff Layers</h3>
+                        <p>Visualise all differences as colour-coded temporary QGIS layers: Features Added, Features Deleted, Attribute Changed, Geometry Modified, and 5 geometry-part overlays.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🌐 GISimple Integration</h3>
+                        <p>Authenticate against a GISimple server. Browse group-shared datasets, download uploaded files, and sync GeoJSON layers directly into QGIS.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📦 Geov Format &amp; MiniGISimple</h3>
+                        <p>Import and export portable <code>.geov</code> ZIP projects (GeoJSON + symbology). Exchange field maps with the <strong>MiniGISimple</strong> Firefox extension. See <a href="13-geov-minigisimple.html">Geov Format &amp; MiniGISimple</a>.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🔒 Trust & Security</h3>
+                        <p>Three trust modes — Trusted Accounts, Network Trusted (CIDR), and Trust All. GISimple group members are auto-trusted. Credentials stored in the QGIS credential manager.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🗄️ Host Connectors</h3>
+                        <p>Transactional read/write connectors for GeoPackage and PostGIS. Atomic commits with automatic GeoJSON backup and full undo/redo support.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Supported formats</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>✅ GeoJSON</h3>
+                        <p>Native support for GeoJSON files with full feature preservation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ GeoPackage (.gpkg)</h3>
+                        <p>Complete GeoPackage support for vector and raster data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ Shapefile (.shp)</h3>
+                        <p>Traditional shapefile format with all associated files.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ KML</h3>
+                        <p>Google Earth KML format for geographic data exchange.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ ZIP archives</h3>
+                        <p>Compressed archives containing multiple GIS files.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ Geov (.geov)</h3>
+                        <p>GeoVirtuallis project ZIP (<code>project.json</code> + <code>layers/*.geojson</code>) for QGIS ↔ MiniGISimple exchange.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ PostGIS</h3>
+                        <p>PostgreSQL spatial database connectivity.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ WFS</h3>
+                        <p>Web Feature Service protocol support.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>✅ IMAP / POP3</h3>
+                        <p>Email protocol support for attachment retrieval.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Plugin phases</h2>
+                <div class="step-box">
+                    <h4>✅ Phase I - Email Reader & Attachment Downloading</h4>
+                    <p><strong>Status:</strong> Complete</p>
+                    <p>IMAP/POP3/EWS adapters, trust evaluation, zip extraction, GIS format validation, message caching.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>✅ Phase II - Data Versioning & Commit Changes</h4>
+                    <p><strong>Status:</strong> Complete</p>
+                    <p>Smart/manual matching engine, attribute + geometry diff, transactional commit with backup, undo/redo, conflict detection.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>✅ Phase III - GISimple Realm Integration</h4>
+                    <p><strong>Status:</strong> Complete</p>
+                    <p>Server-side Keycloak auth, group dataset browsing, uploaded file sync, auto-trust propagation.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Dependencies</h2>
+                <p>GeoInbox uses only Python stdlib and QGIS built-in APIs. No third-party pip packages are required for core functionality.</p>
+                
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Version</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>QGIS</code></td>
+                            <td>≥ 3.28 (Qt6)</td>
+                            <td>Core GIS platform</td>
+                        </tr>
+                        <tr>
+                            <td><code>Python</code></td>
+                            <td>3.12</td>
+                            <td>Bundled with QGIS 4.x</td>
+                        </tr>
+                        <tr>
+                            <td><code>PyQt6</code></td>
+                            <td>bundled</td>
+                            <td>UI framework</td>
+                        </tr>
+                        <tr>
+                            <td><code>SQLite</code></td>
+                            <td>stdlib</td>
+                            <td>Local configuration storage</td>
+                        </tr>
+                        <tr>
+                            <td><code>exchangelib</code></td>
+                            <td>optional</td>
+                            <td>EWS adapter (experimental)</td>
+                        </tr>
+                        <tr>
+                            <td><code>msal</code></td>
+                            <td>optional</td>
+                            <td>Microsoft Graph OAuth (experimental)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-button prev">← Back to Home</a>
+                <a href="02-installation.html" class="nav-button next">Installation →</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

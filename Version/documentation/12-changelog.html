@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - GeoInbox Documentation</title>
+    <meta name="description" content="Version history, new features, bug fixes, and development progress for GeoInbox.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> > Changelog
+        </div>
+        
+        <div class="page-header">
+            <h1>Changelog</h1>
+            <p>Version history, new features, bug fixes, and development progress for GeoInbox.</p>
+        </div>
+        
+        <div class="content">
+            <section>
+                <h2>Version 0.9.0 (Current) - April 2026</h2>
+                <div class="success">
+                    <h3>🎉 Initial Release</h3>
+                    <p>First public release of GeoInbox with core functionality for email-based GIS data exchange and versioning.</p>
+                </div>
+                
+                <h3>✨ Features</h3>
+                <ul>
+                    <li><strong>Email Browser</strong> - Full IMAP/POP3 support with attachment detection</li>
+                    <li><strong>Data Versioning</strong> - Smart comparison engine for GeoPackage and PostGIS</li>
+                    <li><strong>Diff Layers</strong> - Visual representation of data changes in QGIS</li>
+                    <li><strong>GISimple Integration</strong> - Server authentication and data synchronization</li>
+                    <li><strong>Geov Format</strong> - Import/export MiniGISimple-compatible <code>.geov</code> packages (drop, browse, clipboard paste)</li>
+                    <li><strong>Trust System</strong> - Configurable security for email attachments</li>
+                    <li><strong>Host Connectors</strong> - Transactional database operations with backup</li>
+                </ul>
+                
+                <h3>📧 Email Features</h3>
+                <ul>
+                    <li>IMAP and POP3 protocol support</li>
+                    <li>Secure credential storage in QGIS Credential Manager</li>
+                    <li>Automatic GIS attachment detection (GeoJSON, GeoPackage, Shapefile, KML)</li>
+                    <li>ZIP archive extraction and processing</li>
+                    <li>Message caching for offline browsing</li>
+                    <li>Trust-based sender validation</li>
+                </ul>
+                
+                <h3>🔄 Versioning Features</h3>
+                <ul>
+                    <li>Smart feature matching (ID, geometry, attributes)</li>
+                    <li>Comprehensive change detection (additions, deletions, modifications)</li>
+                    <li>Color-coded diff layer visualization</li>
+                    <li>Transactional commits with automatic backup</li>
+                    <li>Full undo/redo support</li>
+                    <li>Conflict resolution strategies</li>
+                </ul>
+                
+                <h3>🌐 GISimple Features</h3>
+                <ul>
+                    <li>Keycloak-based authentication</li>
+                    <li>Group dataset browsing</li>
+                    <li>File upload and download synchronization</li>
+                    <li>Auto-trust for group members</li>
+                </ul>
+                
+                <h3>🗄️ Database Support</h3>
+                <ul>
+                    <li>GeoPackage read/write with transactions</li>
+                    <li>PostGIS full support with schema awareness</li>
+                    <li>Shapefile read-only support</li>
+                    <li>Automatic GeoJSON backup generation</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Documentation updates — September 2026</h2>
+                <ul>
+                    <li>New guide: <a href="13-geov-minigisimple.html">Geov Format &amp; MiniGISimple</a> (import/export, clipboard paste, round-trip with MiniGISimple 1.0.3).</li>
+                    <li>Overview, glossary, settings, and home page updated for <code>.geov</code> workflows.</li>
+                    <li>Search index: corrected GISimple integration link to <code>05-gisimple.html</code>.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>System Requirements</h2>
+                <p><strong>QGIS:</strong> Version 4.0 - 4.99</p>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="11-glossary.html" class="nav-button prev">← Glossary</a>
+                <a href="index.html" class="nav-button next">Back to Home →</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

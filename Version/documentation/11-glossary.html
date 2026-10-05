@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossary - GeoInbox Documentation</title>
+    <meta name="description" content="Key terms and definitions used throughout the GeoInbox documentation.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> > Glossary
+        </div>
+        
+        <div class="page-header">
+            <h1>Glossary</h1>
+            <p>Key terms and definitions used throughout the GeoInbox documentation.</p>
+        </div>
+        
+        <div class="content">
+            <div class="toc">
+                <h3>Quick Navigation</h3>
+                <ul>
+                    <li><a href="#a">A-D</a></li>
+                    <li><a href="#e">E-H</a></li>
+                    <li><a href="#i">I-M</a></li>
+                    <li><a href="#n">N-S</a></li>
+                    <li><a href="#t">T-Z</a></li>
+                </ul>
+            </div>
+
+            <section id="a">
+                <h2>A - D</h2>
+                
+                <h4>Attachment</h4>
+                <p>A file attached to an email message. GeoInbox automatically detects and processes GIS-compatible attachments (GeoJSON, GeoPackage, Shapefile, KML, ZIP archives).</p>
+                
+                <h4>Client Layer</h4>
+                <p>The local QGIS layer representing your field data or working copy. Used as the source for comparison against the host database in versioning operations.</p>
+                
+                <h4>Commit</h4>
+                <p>The process of applying detected changes to the host database. All commits are transactional and include automatic backup creation.</p>
+                
+                <h4>Diff Layer</h4>
+                <p>A temporary QGIS layer that visualizes differences between client and host data. Color-coded to show additions (green), deletions (red), attribute changes (yellow), and geometry modifications (orange).</p>
+            </section>
+
+            <section id="e">
+                <h2>E - H</h2>
+                
+                <h4>Email Browser</h4>
+                <p>The main interface for connecting to mail servers, browsing messages, and downloading GIS attachments. Supports IMAP, POP3, and experimental EWS/Graph protocols.</p>
+                
+                <h4>Feature Matching</h4>
+                <p>The process of identifying corresponding features between client and host datasets. Can be based on ID fields, geometry proximity, or attribute combinations.</p>
+                
+                <h4>Geov Format (.geov)</h4>
+                <p>A ZIP package with <code>project.json</code> and per-layer GeoJSON under <code>layers/</code>. Imported and exported from the GeoInbox <strong>Geov Format</strong> tab; compatible with MiniGISimple save/load and partial layer import.</p>
+
+                <h4>GeoPackage (.gpkg)</h4>
+                <p>An open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial information. Fully supported by GeoInbox for both reading and writing.</p>
+                
+                <h4>Host Database</h4>
+                <p>The authoritative database (GeoPackage or PostGIS) that serves as the reference for versioning comparisons. Changes are committed back to this database.</p>
+            </section>
+
+            <section id="i">
+                <h2>I - M</h2>
+                
+                <h4>IMAP</h4>
+                <p>Internet Message Access Protocol. The recommended email protocol for GeoInbox as it supports folder browsing, message status tracking, and server-side operations.</p>
+                
+                <h4>GISimple</h4>
+                <p>A web-based platform for geospatial data sharing and collaboration. GeoInbox can integrate with GISimple servers for authentication and data synchronization.</p>
+
+                <h4>MiniGISimple</h4>
+                <p>A Firefox extension map viewer (MapLibre) that opens and saves <code>.geov</code> projects, supports partial layer import, simple analysis, legend layout, and optional 3D polygon extrusion. Pairs with GeoInbox for desktop ↔ field workflows.</p>
+                
+                <h4>Message Cache</h4>
+                <p>Local SQLite database that stores email headers (From, Subject, Date, attachments) for offline browsing. Configurable TTL and automatic cleanup.</p>
+            </section>
+
+            <section id="n">
+                <h2>N - S</h2>
+                
+                <h4>POP3</h4>
+                <p>Post Office Protocol version 3. A simpler email protocol that downloads messages to the client. Supported by GeoInbox but lacks folder support and advanced features.</p>
+                
+                <h4>PostGIS</h4>
+                <p>A spatial database extension for PostgreSQL. Supported as a host database type for versioning operations with full transaction support.</p>
+                
+                <h4>Sanitization</h4>
+                <p>The process of converting file paths and names to safe, cross-platform formats. Follows GISimple standards: lowercase, spaces to underscores, special characters removed.</p>
+                
+                <h4>Shapefile</h4>
+                <p>A popular geospatial vector data format. GeoInbox can read shapefiles from email attachments and ZIP archives, requiring all component files (.shp, .dbf, .shx, etc.).</p>
+            </section>
+
+            <section id="t">
+                <h2>T - Z</h2>
+                
+                <h4>Trust Rules</h4>
+                <p>Security settings that determine which email senders are automatically trusted for attachment downloads. Can be based on specific addresses, domains, or network ranges.</p>
+                
+                <h4>Undo Stack</h4>
+                <p>A history of reversible operations maintained by GeoInbox. Allows undoing and redoing commit operations with full state restoration.</p>
+                
+                <h4>Versioning</h4>
+                <p>The core GeoInbox feature that compares client datasets against host databases to detect and visualize changes. Supports smart merging and conflict resolution.</p>
+                
+                <h4>ZIP Extraction</h4>
+                <p>Automatic processing of ZIP archive attachments to extract and validate contained GIS files. Supports nested archives and maintains file relationships.</p>
+            </section>
+
+            <section>
+                <h2>File Format Support</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>Extension</th>
+                            <th>Read</th>
+                            <th>Write</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GeoJSON</td>
+                            <td>.geojson, .json</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>Native format for backups and exports</td>
+                        </tr>
+                        <tr>
+                            <td>GeoPackage</td>
+                            <td>.gpkg</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>Preferred format for host databases</td>
+                        </tr>
+                        <tr>
+                            <td>Shapefile</td>
+                            <td>.shp + components</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>Read-only, requires complete file set</td>
+                        </tr>
+                        <tr>
+                            <td>KML</td>
+                            <td>.kml</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>Google Earth format, read-only</td>
+                        </tr>
+                        <tr>
+                            <td>PostGIS</td>
+                            <td>Database</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>Full transaction support</td>
+                        </tr>
+                        <tr>
+                            <td>Geov Format</td>
+                            <td>.geov</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>Geov Format tab; extracts under <code>geov/</code> in Download Folder</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Common Error Messages</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🔒 "Untrusted sender"</h3>
+                        <p>The email sender is not in your trust list. Review and approve manually, or add to trusted accounts.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>📁 "No GIS files found"</h3>
+                        <p>The email contains no supported GIS attachments. Check file formats and ZIP contents.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🔗 "Connection failed"</h3>
+                        <p>Cannot connect to email server. Verify host, port, credentials, and network connectivity.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>⚠️ "Matching failed"</h3>
+                        <p>Cannot match features between client and host. Check ID fields and matching strategy.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="10-settings.html" class="nav-button prev">← Settings</a>
+                <a href="12-changelog.html" class="nav-button next">Changelog →</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

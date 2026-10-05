@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Versioning - GeoInbox Documentation</title>
+    <meta name="description" content="Compare client datasets against host databases and detect changes in attributes and geometry.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> > <a href="01-overview.html">Core Features</a> > Data Versioning
+        </div>
+        
+        <div class="page-header">
+            <h1>Data Versioning</h1>
+            <p>Compare client datasets against host databases, detect changes, and merge updates with full backup and undo support.</p>
+        </div>
+        
+        <div class="content">
+            <div class="note">
+                <h3>🔀 Smart comparison engine</h3>
+                <p>GeoInbox compares your local QGIS layers against a <strong>host database</strong> (GeoPackage or PostGIS) to detect additions, deletions, attribute changes, and geometry modifications. All changes are visualized as temporary diff layers.</p>
+            </div>
+
+            <section>
+                <h2>How versioning works</h2>
+                <div class="step-box">
+                    <h4>1. Load your client data</h4>
+                    <p>Add your GeoJSON, GeoPackage, or Shapefile layers to QGIS. These represent your "client" or "field" data.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>2. Configure host connection</h4>
+                    <p>Set up a connection to your host database (GeoPackage file or PostGIS database) that contains the "authoritative" or "server" version of the data.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>3. Run comparison</h4>
+                    <p>GeoInbox matches features between client and host layers using configurable matching rules (by ID, geometry proximity, or attributes).</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>4. Review differences</h4>
+                    <p>All detected changes are displayed as color-coded temporary layers in QGIS, allowing you to visually inspect every modification.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>5. Commit or discard</h4>
+                    <p>Accept changes to update the host database, or discard them. All operations are transactional with automatic backup.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Supported host databases</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Database Type</th>
+                            <th>Connection</th>
+                            <th>Features</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GeoPackage</td>
+                            <td>File path</td>
+                            <td>Full read/write, transactions, backup</td>
+                        </tr>
+                        <tr>
+                            <td>PostGIS</td>
+                            <td>PostgreSQL connection</td>
+                            <td>Full read/write, transactions, schema support</td>
+                        </tr>
+                        <tr>
+                            <td>Shapefile</td>
+                            <td>Directory path</td>
+                            <td>Read-only comparison (no write-back)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Feature matching strategies</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🆔 ID-based matching</h3>
+                        <p>Match features using a unique identifier field (e.g., 'id', 'fid', 'objectid'). Most reliable for structured datasets.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>📍 Geometry proximity</h3>
+                        <p>Match features based on spatial proximity. Useful when IDs are not available or reliable.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🏷️ Attribute-based</h3>
+                        <p>Match using one or more attribute fields (e.g., name, code). Flexible for various data structures.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🤖 Smart matching</h3>
+                        <p>Combines multiple strategies with confidence scoring. Handles complex matching scenarios automatically.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Types of changes detected</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Change Type</th>
+                            <th>Description</th>
+                            <th>Layer Color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Features Added</td>
+                            <td>New features in client not present in host</td>
+                            <td>🟢 Green</td>
+                        </tr>
+                        <tr>
+                            <td>Features Deleted</td>
+                            <td>Features in host but missing from client</td>
+                            <td>🔴 Red</td>
+                        </tr>
+                        <tr>
+                            <td>Attributes Changed</td>
+                            <td>Feature exists in both but attributes differ</td>
+                            <td>🟡 Yellow</td>
+                        </tr>
+                        <tr>
+                            <td>Geometry Modified</td>
+                            <td>Feature exists in both but geometry differs</td>
+                            <td>🟠 Pastel Orange</td>
+                        </tr>
+                        <tr>
+                            <td>Both Changed</td>
+                            <td>Feature has both geometry and attribute changes</td>
+                            <td>🌸 Pastel Pink</td>
+                        </tr>
+                        <tr>
+                            <td>Geometry Parts</td>
+                            <td>Added/removed vertices, rings, or parts</td>
+                            <td>🟣 Purple</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Comparison workflow</h2>
+                <div class="step-box">
+                    <h4>Step 1: Open Versioning panel</h4>
+                    <p>Go to the Versioning tab in the GeoInbox panel. Select your client layer from the dropdown.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 2: Configure host connection</h4>
+                    <p>Click "Set Host Database" and choose your GeoPackage file or PostGIS connection. Select the target table/layer.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 3: Choose matching strategy</h4>
+                    <p>Select how features should be matched: by ID field, geometry proximity, or attribute combination.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 4: Run comparison</h4>
+                    <p>Click "Compare" to start the analysis. Progress is shown in the QGIS task manager.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 5: Review results</h4>
+                    <p>Diff layers are added to QGIS automatically. Use the attribute table and map canvas to inspect changes.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Committing changes</h2>
+                <p>After reviewing the differences, you can commit selected changes to the host database:</p>
+                <ul>
+                    <li><strong>Selective commit</strong> — Choose which features to add, update, or delete</li>
+                    <li><strong>Batch commit</strong> — Apply all changes of a specific type (e.g., all additions)</li>
+                    <li><strong>Full commit</strong> — Apply all detected changes at once</li>
+                </ul>
+                
+                <div class="warning">
+                    <h3>⚠️ Backup and recovery</h3>
+                    <p>Before any write operation, GeoInbox creates an automatic backup of the affected data. Backups are stored as timestamped GeoJSON files and can be used for manual recovery if needed.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Conflict resolution</h2>
+                <p>When the same feature has been modified in both client and host since the last sync:</p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🤝 Manual resolution</h3>
+                        <p>Review conflicting features side-by-side and choose which version to keep.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>📅 Timestamp priority</h3>
+                        <p>Automatically prefer the most recently modified version.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>🏠 Host priority</h3>
+                        <p>Always keep the host version and discard client changes.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>📱 Client priority</h3>
+                        <p>Always apply client changes and overwrite host version.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Undo and redo</h2>
+                <p>GeoInbox maintains a complete operation history for each host database:</p>
+                <ul>
+                    <li>Undo the last commit operation</li>
+                    <li>Redo a previously undone operation</li>
+                    <li>View operation history with timestamps and change summaries</li>
+                    <li>Restore from any point in the history</li>
+                </ul>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="13-geov-minigisimple.html" class="nav-button prev">← Geov Format &amp; MiniGISimple</a>
+                <a href="05-diff-layers.html" class="nav-button next">Diff Layers →</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

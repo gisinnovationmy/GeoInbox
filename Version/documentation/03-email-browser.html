@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Browser - GeoInbox Documentation</title>
+    <meta name="description" content="Browse IMAP/POP3 mailboxes, preview messages, and download GIS attachments from inside QGIS.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> > <a href="01-overview.html">Core Features</a> > Email Browser
+        </div>
+        
+        <div class="page-header">
+            <h1>Email Browser</h1>
+            <p>Browse IMAP/POP3 mailboxes, preview messages, and download GIS attachments — all from inside QGIS.</p>
+        </div>
+        
+        <div class="content">
+            <div class="note">
+                <h3>📧 Protocol support</h3>
+                <p>GeoInbox supports <strong>IMAP</strong> (recommended) and <strong>POP3</strong> natively. Exchange Web Services (EWS) and Microsoft Graph are available as experimental adapters.</p>
+            </div>
+
+            <section>
+                <h2>Connecting to a mail server</h2>
+                <div class="step-box">
+                    <h4>Step 1: Open Settings</h4>
+                    <p>Click the Settings button in the Email toolbar. Go to the Servers tab.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 2: Add a server</h4>
+                    <p>Click Add Server and fill in Host, Port, Protocol (IMAP/POP3), SSL/TLS, and your credentials. Passwords are stored securely in the QGIS Credential Manager.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 3: Set as default</h4>
+                    <p>Check "Make Default" to auto-connect this server when the plugin loads.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 4: Connect</h4>
+                    <p>Select the server from the dropdown in the toolbar and click Connect. The mailbox list will populate on the left.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Supported email protocols</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Protocol</th>
+                            <th>Status</th>
+                            <th>Authentication</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>IMAP</td>
+                            <td>✅ Core</td>
+                            <td>Username/Password, OAuth2 Bearer</td>
+                            <td>Recommended. Supports folders, mark-as-read.</td>
+                        </tr>
+                        <tr>
+                            <td>POP3</td>
+                            <td>✅ Core</td>
+                            <td>Username/Password</td>
+                            <td>No folder support. Downloads messages only.</td>
+                        </tr>
+                        <tr>
+                            <td>EWS</td>
+                            <td>⚗️ Experimental</td>
+                            <td>Username/Password (NTLM)</td>
+                            <td>Requires exchangelib package.</td>
+                        </tr>
+                        <tr>
+                            <td>Microsoft Graph</td>
+                            <td>⚗️ Experimental</td>
+                            <td>OAuth2 (MSAL)</td>
+                            <td>Requires msal package. Microsoft 365 only.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Message list columns</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Column</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>From</td>
+                            <td>Sender email address</td>
+                        </tr>
+                        <tr>
+                            <td>Subject</td>
+                            <td>Email subject line</td>
+                        </tr>
+                        <tr>
+                            <td>Date</td>
+                            <td>Received date/time</td>
+                        </tr>
+                        <tr>
+                            <td>Size</td>
+                            <td>Total message size in KB/MB</td>
+                        </tr>
+                        <tr>
+                            <td>Read</td>
+                            <td>✓ if message has been marked as read</td>
+                        </tr>
+                        <tr>
+                            <td>Trusted</td>
+                            <td>✓ if sender matches configured trust rules</td>
+                        </tr>
+                        <tr>
+                            <td>Attachments</td>
+                            <td>Count and types of GIS attachments detected</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Filtering messages</h2>
+                <p>Use the filter bar at the bottom of the message list to narrow results:</p>
+                <ul>
+                    <li><strong>All / With GIS attachments</strong> — show only messages that have GIS files attached</li>
+                    <li><strong>Read / Unread</strong> — filter by read status</li>
+                    <li><strong>Trusted / Untrusted</strong> — filter by sender trust</li>
+                    <li><strong>Search</strong> — free-text search across From, Subject fields (cached headers only)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Downloading attachments</h2>
+                <div class="step-box">
+                    <h4>Step 1: Select a message</h4>
+                    <p>Click a message row. The preview pane shows the message body and a list of detected attachments.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 2: Review attachments</h4>
+                    <p>Each attachment shows filename, size, and detected GIS format. Unsupported formats are listed but greyed out.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h4>Step 3: Download</h4>
+                    <p>Click Download to save to the configured download folder, or Download + Open in QGIS to add the layer immediately.</p>
+                </div>
+                
+                <div class="warning">
+                    <h3>⚠️ Untrusted sender confirmation</h3>
+                    <p>If a sender is not in your trust list, GeoInbox will show a confirmation dialog before downloading any attachment. You must explicitly approve the download. See <a href="07-security.html">Security &amp; trust</a> for configuring trust rules.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Supported attachment formats</h2>
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>Extension(s)</th>
+                            <th>Direct / In ZIP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GeoJSON</td>
+                            <td>.geojson, .json</td>
+                            <td>Both</td>
+                        </tr>
+                        <tr>
+                            <td>GeoPackage</td>
+                            <td>.gpkg</td>
+                            <td>Both</td>
+                        </tr>
+                        <tr>
+                            <td>KML</td>
+                            <td>.kml</td>
+                            <td>Both</td>
+                        </tr>
+                        <tr>
+                            <td>Shapefile</td>
+                            <td>.shp + .dbf + .shx (+ .prj, .cpg)</td>
+                            <td>ZIP only (complete set required)</td>
+                        </tr>
+                        <tr>
+                            <td>ZIP archive</td>
+                            <td>.zip</td>
+                            <td>Recursively extracted</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Offline message caching</h2>
+                <p>GeoInbox caches message headers (From, Subject, Date, attachments) in a local SQLite database. This allows browsing message metadata without an active server connection.</p>
+                <ul>
+                    <li>Cache TTL is configurable in Settings → Cache</li>
+                    <li>Click "Clear Cache" in Settings to force a fresh fetch</li>
+                    <li>Message bodies and attachments are never cached — they are fetched on demand</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Mark as read</h2>
+                <p>When a message is downloaded, GeoInbox can automatically mark it as read on the server. This behaviour is controlled by the <strong>Auto-mark as read on download</strong> setting (Settings → General). You can also mark messages manually by right-clicking in the message list.</p>
+            </section>
+
+            <section>
+                <h2>Background threading</h2>
+                <p>All network operations (connect, list messages, fetch body, download attachment) run in background threads using <code>QgsTask</code>. The QGIS UI remains fully responsive during all operations. A progress bar appears in the panel during long operations, with a Cancel button.</p>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="02-installation.html" class="nav-button prev">← Installation</a>
+                <a href="04-versioning.html" class="nav-button next">Data Versioning →</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

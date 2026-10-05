@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoInbox - QGIS Plugin Documentation | Email-based GIS Data Exchange</title>
+    <meta name="description" content="GeoInbox - Complete user manual for QGIS plugin. Email-based GIS data exchange, versioning, and GISimple server integration.">
+    <meta name="keywords" content="QGIS, GeoInbox, email GIS, data versioning, GISimple, geospatial data management">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* GeoInbox Theme - Index page */
+        :root {
+            --geoinbox-primary: #2a8ff5;
+            --geoinbox-secondary: #1470ea;
+            --geoinbox-light: #e3f2fd;
+            --geoinbox-lighter: #f3f9ff;
+            --geoinbox-dark: #1565c0;
+            --geoinbox-text: #2c3e50;
+        }
+        
+        body {
+            background: linear-gradient(145deg, var(--geoinbox-lighter) 0%, var(--geoinbox-light) 50%, #e8f4fd 100%);
+        }
+        
+        header {
+            background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(243,249,255,0.98) 100%);
+            padding: 45px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(42,143,245,0.12);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            border: 1px solid rgba(227,242,253,0.9);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--geoinbox-primary), var(--geoinbox-secondary), #64b5f6);
+        }
+        
+        header img {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
+            border-radius: 12px;
+        }
+        
+        header > div:last-child {
+            flex: 1;
+        }
+        
+        header h1 {
+            color: var(--geoinbox-dark);
+            font-size: clamp(1.5em, 5vw, 2.5em);
+            margin-bottom: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        header p {
+            color: var(--geoinbox-text);
+            font-size: clamp(0.9em, 2vw, 1.1em);
+            text-align: left;
+            margin-bottom: 8px;
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .nav-card {
+            background: linear-gradient(145deg, #FFFFFF 0%, var(--geoinbox-lighter) 100%);
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(42,143,245,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 1px solid rgba(227,242,253,0.8);
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(42,143,245,0.15);
+            text-decoration: none;
+            background: linear-gradient(145deg, #FFFFFF 0%, #FFFFFF 100%);
+            border-color: var(--geoinbox-secondary);
+        }
+        
+        .nav-card h2 {
+            color: var(--geoinbox-primary);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        
+        .nav-card:hover h2 {
+            color: var(--geoinbox-dark);
+        }
+        
+        .nav-card p {
+            color: var(--geoinbox-text);
+            font-size: 0.92em;
+            line-height: 1.5;
+        }
+        
+        .nav-card .icon {
+            font-size: 2.2em;
+            margin-bottom: 12px;
+        }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            color: #7F8C8D;
+            margin-top: 30px;
+            box-shadow: 0 4px 16px rgba(42,143,245,0.08);
+            border: 1px solid rgba(227,242,253,0.8);
+        }
+        
+        footer strong {
+            color: var(--geoinbox-dark);
+        }
+        
+        .quick-links {
+            background: rgba(255, 255, 255, 0.97);
+            padding: 30px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 20px rgba(42,143,245,0.08);
+            border: 1px solid rgba(227,242,253,0.8);
+        }
+        
+        .quick-links h3 {
+            color: var(--geoinbox-dark);
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+        
+        .quick-links ul {
+            list-style: none;
+            columns: 2;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .quick-links li {
+            margin-bottom: 12px;
+        }
+        
+        .quick-links a {
+            color: var(--geoinbox-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        .quick-links a:hover {
+            color: var(--geoinbox-dark);
+            background: var(--geoinbox-light);
+            text-decoration: none;
+        }
+        
+        .search-box {
+            background: rgba(255, 255, 255, 0.97);
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 20px rgba(42,143,245,0.08);
+            border: 1px solid rgba(227,242,253,0.8);
+        }
+        
+        .search-box h3 {
+            color: var(--geoinbox-dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--geoinbox-light);
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--geoinbox-secondary);
+            box-shadow: 0 0 8px rgba(42,143,245,0.25);
+        }
+        
+        .search-results {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--geoinbox-lighter) 0%, var(--geoinbox-light) 100%);
+            border-radius: 8px;
+            border-left: 4px solid var(--geoinbox-secondary);
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .search-results ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .search-results li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(42,143,245,0.1);
+        }
+        
+        .search-results li:last-child {
+            border-bottom: none;
+        }
+        
+        .search-results a {
+            color: var(--geoinbox-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .search-results a:hover {
+            color: var(--geoinbox-secondary);
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 25px;
+            }
+            
+            header img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            header h1, header p {
+                text-align: center;
+            }
+            
+            .quick-links ul {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+    <div class="container">
+        <header>
+            <img src="images/logo.png" alt="GeoInbox Logo">
+            <div>
+                <h1>GeoInbox - QGIS Plugin</h1>
+                <p>Complete User Manual v0.9.0</p>
+                <p style="font-size: 0.9em; margin-top: 10px;">Static <strong>HTML website</strong> — open <code>documentation/index.html</code> in your browser (works offline from the plugin folder).</p>
+                <p style="font-size: 0.9em; margin-top: 6px;">Email-based GIS data exchange, field data versioning &amp; merging, and GISimple server integration.</p>
+                <p style="font-size: 0.85em; margin-top: 5px; color: #999;">Requires: QGIS 3.28+, Python 3.12</p>
+            </div>
+        </header>
+        
+        <div class="warning" style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border-left: 5px solid #FF9800; padding: 20px; margin: 20px 0; border-radius: 8px;">
+            <h3 style="color: #E65100; margin-top: 0;">⚠️ Plugin Status: Development Version</h3>
+            <p style="color: #BF360C; font-size: 1em; line-height: 1.6;">
+                <strong>Important:</strong> This plugin is currently in development (v0.9.0). 
+                Features are being actively developed and tested. Use in production environments with caution.
+            </p>
+            <p style="color: #BF360C; font-size: 1em; line-height: 1.6;">
+                <strong>Recommendation:</strong> Test thoroughly in development environments before deploying to production workflows.
+            </p>
+        </div>
+        
+        <div class="search-box">
+            <h3>🔍 Search Documentation</h3>
+            <input type="text" id="searchInput" placeholder="Search for topics (e.g., 'installation', 'email browser', 'versioning', 'gisimple')..." />
+            <div id="searchResults" class="search-results"></div>
+        </div>
+        
+        <div class="quick-links">
+            <h3>📚 Quick Navigation</h3>
+            <ul>
+                <li><a href="02-installation.html">Installation</a></li>
+                <li><a href="10-settings.html">Settings & Configuration</a></li>
+                <li><a href="03-email-browser.html">Retrieve Attachment from Email</a></li>
+                <li><a href="05-gisimple.html">Load Files from GISimple</a></li>
+                <li><a href="13-geov-minigisimple.html">Geov Format &amp; MiniGISimple</a></li>
+                <li><a href="04-versioning.html">Layer Selection & Comparison</a></li>
+                <li><a href="05-diff-layers.html">Diff layers</a></li>
+                <li><a href="07-security.html">Security &amp; trust</a></li>
+                <li><a href="12-changelog.html">Changelog</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-grid">
+            <a href="02-installation.html" class="nav-card">
+                <div class="icon">📥</div>
+                <h2>Installation</h2>
+                <p>Install GeoInbox from the QGIS Plugin Repository.</p>
+            </a>
+            
+            <a href="10-settings.html" class="nav-card">
+                <div class="icon">⚙️</div>
+                <h2>Settings & Configuration</h2>
+                <p>Configure email servers, GISimple connections, and trust settings.</p>
+            </a>
+            
+            <a href="03-email-browser.html" class="nav-card">
+                <div class="icon">📧</div>
+                <h2>Retrieve Attachment from Email</h2>
+                <p>Connect to email servers, browse messages, and download GIS attachments.</p>
+            </a>
+            
+            <a href="05-gisimple.html" class="nav-card">
+                <div class="icon">🌐</div>
+                <h2>Load Files from GISimple</h2>
+                <p>Connect to GISimple server, browse group datasets, and download GIS files.</p>
+            </a>
+
+            <a href="13-geov-minigisimple.html" class="nav-card">
+                <div class="icon">📦</div>
+                <h2>Geov Format &amp; MiniGISimple</h2>
+                <p>Import/export .geov ZIP projects; exchange with the MiniGISimple Firefox viewer.</p>
+            </a>
+            
+            <a href="04-versioning.html" class="nav-card">
+                <div class="icon">🎯</div>
+                <h2>Layer Selection & Comparison</h2>
+                <p>Select client and host layers, run comparison, and generate diff layers.</p>
+            </a>
+            
+            <a href="12-changelog.html" class="nav-card">
+                <div class="icon">📝</div>
+                <h2>Changelog</h2>
+                <p>Version history, new features, bug fixes, and development progress.</p>
+            </a>
+        </div>
+        
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+            <p style="font-size: 0.85em; color: #999;">Requires: QGIS 4.0 - 4.99</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Search functionality
+        const searchData = [
+            { title: "Overview", url: "01-overview.html", keywords: ["overview", "features", "introduction", "geoinbox", "email gis"] },
+            { title: "Installation", url: "02-installation.html", keywords: ["installation", "install", "setup", "requirements", "qgis"] },
+            { title: "Email Browser", url: "03-email-browser.html", keywords: ["email", "browser", "imap", "pop3", "attachments", "mailbox"] },
+            { title: "Data Versioning", url: "04-versioning.html", keywords: ["versioning", "version", "compare", "diff", "changes", "merge"] },
+            { title: "Diff Layers", url: "05-diff-layers.html", keywords: ["diff", "layers", "visualization", "changes", "geometry", "attributes"] },
+            { title: "GISimple Integration", url: "05-gisimple.html", keywords: ["gisimple", "server", "integration", "authentication", "sync"] },
+            { title: "Geov Format & MiniGISimple", url: "13-geov-minigisimple.html", keywords: ["geov", "minigisimple", "firefox", "import", "export", "drop", "paste", "project.json", "geojson zip"] },
+            { title: "Security & Trust", url: "07-security.html", keywords: ["security", "trust", "authentication", "credentials", "safety"] },
+            { title: "Host Connectors", url: "08-connectors.html", keywords: ["connectors", "geopackage", "postgis", "database", "transactional"] },
+            { title: "Architecture", url: "09-architecture.html", keywords: ["architecture", "technical", "components", "structure", "design"] },
+            { title: "Settings", url: "10-settings.html", keywords: ["settings", "configuration", "options", "preferences"] },
+            { title: "Glossary", url: "11-glossary.html", keywords: ["glossary", "terms", "definitions", "keywords"] },
+            { title: "Changelog", url: "12-changelog.html", keywords: ["changelog", "version", "history", "updates", "changes"] }
+        ];
+        
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            
+            if (query.length === 0) {
+                searchResults.classList.remove('active');
+                return;
+            }
+            
+            const results = searchData.filter(item => {
+                return item.keywords.some(keyword => keyword.includes(query)) || 
+                       item.title.toLowerCase().includes(query);
+            });
+            
+            if (results.length > 0) {
+                let html = '<strong>Search Results:</strong><ul>';
+                results.forEach(result => {
+                    html += `<li><a href="${result.url}">${result.title}</a></li>`;
+                });
+                html += '</ul>';
+                searchResults.innerHTML = html;
+                searchResults.classList.add('active');
+            } else {
+                searchResults.innerHTML = '<p style="color: #999;">No results found. Try different keywords.</p>';
+                searchResults.classList.add('active');
+            }
+        });
+    </script>
+    
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

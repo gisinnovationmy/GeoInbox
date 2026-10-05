@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geov Format &amp; MiniGISimple - GeoInbox Documentation</title>
+    <meta name="description" content="Import and export GeoVirtuallis .geov packages in QGIS with GeoInbox; exchange projects with MiniGISimple Firefox extension.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> &gt; Geov Format &amp; MiniGISimple
+        </div>
+
+        <div class="page-header">
+            <h1>Geov Format &amp; MiniGISimple</h1>
+            <p>Portable field projects as <code>.geov</code> ZIP files — share between QGIS (GeoInbox) and the MiniGISimple map viewer (Firefox).</p>
+        </div>
+
+        <div class="content">
+            <div class="note">
+                <h3>📦 What is Geov Format?</h3>
+                <p>A <strong>.geov</strong> file is a ZIP package containing <code>project.json</code> (layer list, styles, map camera) and <code>layers/*.geojson</code> feature data. It is designed for lightweight exchange of vector projects with symbology, not as a full QGIS project replacement.</p>
+            </div>
+
+            <section>
+                <h2>Open the Geov tab in GeoInbox</h2>
+                <p>In the main GeoInbox window, select <strong>📦 Geov Format</strong> in the left sidebar.</p>
+            </section>
+
+            <section>
+                <h2>Import Geov Format (into QGIS)</h2>
+                <div class="step-box">
+                    <h4>Prerequisites</h4>
+                    <p>Set a <strong>Download folder</strong> in <a href="10-settings.html">Settings</a>. Imports are unpacked under <code>&lt;Download folder&gt;/geov/&lt;project&gt;_&lt;timestamp&gt;/</code> and layers are added to the current QGIS project with styles from <code>project.json</code>.</p>
+                </div>
+
+                <h3>Ways to import</h3>
+                <ul>
+                    <li><strong>Drop zone</strong> — drag a <code>.geov</code> file onto the blue import box (highlighted while dragging).</li>
+                    <li><strong>Browse for .geov…</strong> — pick a file from disk.</li>
+                    <li><strong>Paste from clipboard</strong> — after copying a <code>.geov</code> file in Explorer (Ctrl+C), click the button or right-click the drop zone → Paste (Ctrl+V). Useful when chat apps do not support drag-and-drop.</li>
+                    <li><strong>Drop on the panel</strong> — you can also drop onto the Geov Format page outside the box.</li>
+                </ul>
+
+                <div class="warning">
+                    <h3>⚠️ Outlook / WhatsApp tips</h3>
+                    <ul>
+                        <li>Outlook: drag the <em>attachment</em>, not the whole message.</li>
+                        <li>WhatsApp: save the file first, then copy from Explorer or browse.</li>
+                    </ul>
+                </div>
+
+                <p>After a successful import, the status line shows how many layers were loaded and the extract folder path. A QGIS message bar confirmation appears.</p>
+            </section>
+
+            <section>
+                <h2>Export to Geov (from QGIS)</h2>
+                <ol>
+                    <li>Enter a <strong>Project name</strong> (used in <code>project.json</code> and the suggested file name).</li>
+                    <li>Optionally enable <strong>Only layers checked visible in the layer tree</strong>.</li>
+                    <li>Use <strong>Refresh layers</strong> / <strong>Select all</strong> and choose vector layers in the list.</li>
+                    <li>Click <strong>Export to Geov…</strong> and save the <code>.geov</code> file.</li>
+                </ol>
+                <p>The export uses the current map extent and CRS. Packages are <strong>MiniGISimple-compatible</strong> (same ZIP layout and style fields).</p>
+            </section>
+
+            <section>
+                <h2>MiniGISimple (Firefox) — companion viewer</h2>
+                <p><strong>MiniGISimple</strong> is a lightweight MapLibre-based GIS in a Firefox extension (v<strong>1.0.3</strong> and later). Use it to view and analyse Geov projects without QGIS.</p>
+
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>GeoInbox (QGIS)</th>
+                            <th>MiniGISimple (Firefox)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Open full <code>.geov</code> project</td>
+                            <td>Geov Format → Import (all layers)</td>
+                            <td>Drop on map or Project → Load</td>
+                        </tr>
+                        <tr>
+                            <td>Add some layers only</td>
+                            <td>Import loads all layers from package</td>
+                            <td><strong>Project → Import Layer from Geov</strong> — pick layers, keep current project</td>
+                        </tr>
+                        <tr>
+                            <td>Create <code>.geov</code></td>
+                            <td>Geov Format → Export to Geov</td>
+                            <td><strong>Project → Save to Geov File</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Field analysis (buffer, select by location, stats, …)</td>
+                            <td>QGIS tools</td>
+                            <td><strong>Simple analysis</strong> menu (distances use Measure units)</td>
+                        </tr>
+                        <tr>
+                            <td>3D building-style view</td>
+                            <td>QGIS 3D / other</td>
+                            <td>Layer styling → <strong>3D extrusion</strong> on polygons</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Typical round trip</h3>
+                <div class="step-box">
+                    <p><strong>QGIS → field → QGIS:</strong> Export Geov in GeoInbox → email or copy file → open in MiniGISimple for quick map review or light edits → export updated Geov or send back → Import in GeoInbox.</p>
+                </div>
+                <div class="step-box">
+                    <p><strong>Partial merge in MiniGISimple:</strong> User opens an existing MiniGISimple session and uses <strong>Import Layer from Geov</strong> to add selected layers (with colors and classified symbology) from a package you exported.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Styles and symbology</h2>
+                <ul>
+                    <li>Single-symbol colors and stroke settings are stored in each layer’s <code>style</code> block in <code>project.json</code>.</li>
+                    <li><strong>Categorized</strong> and <strong>graduated</strong> symbology are supported when exported with materialized classes/breaks (MiniGISimple symbology schema).</li>
+                    <li>GeoInbox applies styles when loading layers into QGIS via <code>apply_geov_symbology</code>.</li>
+                    <li>MiniGISimple may embed an optional <code>settings.json</code> sidecar (labels, clustering, layout); GeoInbox ignores this file for the portable Geov contract.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Related documentation</h2>
+                <ul>
+                    <li>MiniGISimple HTML manual: <code>documentation/index.html</code> in the MiniGISimple repo (user guide, <code>02-geov-symbology.html</code>).</li>
+                    <li>GeoInbox download folder: <a href="10-settings.html">Settings</a></li>
+                </ul>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="05-gisimple.html" class="nav-button prev">← Load Files from GISimple</a>
+                <a href="04-versioning.html" class="nav-button next">Layer Selection &amp; Comparison →</a>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    <script>
+        window.addEventListener('scroll', function() {
+            var backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

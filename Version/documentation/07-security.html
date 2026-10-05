@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security &amp; trust — GeoInbox Documentation</title>
+    <meta name="description" content="Trust rules for email attachments, credentials, and safe GIS data exchange.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> &gt; Security &amp; trust
+        </div>
+        <div class="page-header">
+            <h1>Security &amp; trust</h1>
+            <p>GeoInbox downloads GIS files from email and remote servers. Trust settings control who can send attachments without an extra confirmation step.</p>
+        </div>
+        <div class="content">
+            <section>
+                <h2>Untrusted senders</h2>
+                <p>When you download from the <a href="03-email-browser.html">Email browser</a>, GeoInbox checks the sender against your trust rules. If the sender is not trusted, you must confirm before any file is saved to disk.</p>
+            </section>
+            <section>
+                <h2>Trust modes</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Trusted accounts</h3>
+                        <p>Explicit email addresses (colleagues, known field teams) that may send attachments without prompts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Network trusted (CIDR)</h3>
+                        <p>Trust senders from IP ranges or domains on your organisation network.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>GISimple auto-trust</h3>
+                        <p>When connected to GISimple, members of your group can be treated as trusted for shared datasets.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Trust all</h3>
+                        <p>Skips confirmation for every sender. Convenient only in isolated lab setups — not recommended for production mailboxes.</p>
+                    </div>
+                </div>
+                <p>Configure these in the GeoInbox <strong>Settings</strong> tab. See also <a href="10-settings.html">Settings &amp; configuration</a>.</p>
+            </section>
+            <section>
+                <h2>Credentials</h2>
+                <ul>
+                    <li>Email and database passwords are stored in the <strong>QGIS Credential Manager</strong> (encrypted by QGIS).</li>
+                    <li>GISimple login uses token-based auth; tokens refresh in the background while QGIS is open.</li>
+                    <li>Standalone IMAP/POP3 accounts can be stored in the plugin’s local SQLite configuration when not using GISimple auth.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Safe practices</h2>
+                <div class="warning">
+                    <h3>Review before you open in QGIS</h3>
+                    <p>GIS attachments are normal files on disk. Only open data from senders you recognise. ZIP archives are extracted under your download folder — inspect contents if the message looks suspicious.</p>
+                </div>
+            </section>
+            <div class="nav-buttons">
+                <a href="05-diff-layers.html" class="nav-button prev">← Diff layers</a>
+                <a href="08-connectors.html" class="nav-button next">Host connectors →</a>
+            </div>
+        </div>
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to top">↑</a>
+    <script>
+        window.addEventListener('scroll', function() {
+            var el = document.getElementById('backToTop');
+            if (window.scrollY > 300) el.classList.add('visible'); else el.classList.remove('visible');
+        });
+    </script>
+</body>
+</html>

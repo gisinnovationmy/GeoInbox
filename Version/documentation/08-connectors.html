@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host connectors — GeoInbox Documentation</title>
+    <meta name="description" content="GeoPackage and PostGIS host databases for versioning read/write and commits.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="top">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Documentation</a> &gt; Host connectors
+        </div>
+        <div class="page-header">
+            <h1>Host connectors</h1>
+            <p>The <strong>host</strong> is the authoritative copy of your data — usually a GeoPackage file or PostGIS database. GeoInbox reads it for comparison and writes back when you commit approved changes.</p>
+        </div>
+        <div class="content">
+            <section>
+                <h2>Supported hosts</h2>
+                <table class="format-table">
+                    <thead><tr><th>Type</th><th>Read</th><th>Write / commit</th><th>Notes</th></tr></thead>
+                    <tbody>
+                        <tr><td>GeoPackage</td><td>Yes</td><td>Yes</td><td>Single file; good for desktop workflows</td></tr>
+                        <tr><td>PostGIS</td><td>Yes</td><td>Yes</td><td>PostgreSQL connection; schema-aware</td></tr>
+                        <tr><td>Shapefile</td><td>Yes</td><td>No</td><td>Compare only; cannot commit back to shapefile host</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Transactional commits</h2>
+                <p>When you commit from the Versioning tab, GeoInbox applies inserts, updates, and deletes inside a database transaction where the backend supports it. If something fails mid-commit, the host should roll back to a consistent state.</p>
+            </section>
+            <section>
+                <h2>Automatic backup</h2>
+                <p>Before modifying a host layer, GeoInbox can export affected data to timestamped <strong>GeoJSON</strong> files under your download folder (<code>backups/</code>). Use these for manual recovery if needed. Enable or confirm this behaviour in <a href="10-settings.html">Settings</a> (<strong>Backup before commit</strong>).</p>
+            </section>
+            <section>
+                <h2>Undo and redo</h2>
+                <p>Recent commit operations can be undone or redone from the versioning UI when the connector supports operation history for that host. See <a href="04-versioning.html">Data versioning</a>.</p>
+            </section>
+            <div class="nav-buttons">
+                <a href="07-security.html" class="nav-button prev">← Security &amp; trust</a>
+                <a href="09-architecture.html" class="nav-button next">Architecture →</a>
+            </div>
+        </div>
+        <footer>
+            <p><strong>GeoInbox - QGIS Plugin v0.9.0</strong></p>
+            <p>&copy; 2026 GIS Innovation Sdn. Bhd. All rights reserved.</p>
+        </footer>
+    </div>
+    <a href="#top" class="back-to-top" id="backToTop" title="Back to top">↑</a>
+    <script>
+        window.addEventListener('scroll', function() {
+            var el = document.getElementById('backToTop');
+            if (window.scrollY > 300) el.classList.add('visible'); else el.classList.remove('visible');
+        });
+    </script>
+</body>
+</html>

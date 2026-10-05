@@ -1,0 +1,28 @@
+[general]
+name=GeoInbox
+qgisMinimumVersion=4.0
+qgisMaximumVersion=4.99
+description=GeoInbox helps to transmit and prepare governed field-to-office-to-field GIS data in QGIS 4 by receiving them directly via email, GISimple connection, or via GeoVirtuallis GEOV (.geov) from MiniGISimple. Data can be validated against reference layers; publish approved updates to existing GeoPackage or PostGIS datasets; and export map extents and layers to GEOV for the MiniGISimple Firefox add-on or the GeoVirtuallis app for Android. It supports attachment retrieval, difference review, controlled merge, and round-trip field packages—with IMAP/POP3 or GISimple authentication.
+version=0.9.0
+author=GIS Innovation Sdn. Bhd.
+email=mygis@gis.my
+
+about=GeoInbox helps organisations transmit and prepare governed field-to-office-to-field GIS data inside the desktop environment they already use for authoritative mapping.
+    Incoming data can arrive directly from the field or from partners: browse IMAP or POP3 mailboxes and retrieve GIS attachments in GeoJSON; connect to a GISimple server to access group-shared datasets and uploaded files; or open GeoVirtuallis GEOV (.geov) packages from the MiniGISimple Firefox add-on—including by dragging and dropping a .geov file onto the GeoInbox dialog, or pasting a .geov file you received via messaging apps such as WhatsApp.
+    Once data is in QGIS, GeoInbox supports validation against reference layers stored as your system of record. Compare client datasets with host layers in GeoPackage or PostGIS to identify added and removed features, attribute changes, and geometry updates. Review differences on the map, then merge only approved changes back into those existing GeoPackage or PostGIS datasets.
+    For the return path to the field, export map extents and layers to GEOV for the MiniGISimple Firefox add-on or the GeoVirtuallis app for Android. Import and export use the same portable GEOV packages; drag and drop or paste .geov files into the dialog to load field projects for review and further processing.
+    GeoInbox combines attachment retrieval, structured difference review, controlled merge, and round-trip field packages. Use standalone IMAP/POP3 configuration or GISimple authentication.
+
+homepage=http://gis.com.my/geoinbox/
+tracker=https://github.com/gisinnovationmy/GeoInbox/issues
+repository=https://github.com/gisinnovationmy/GeoInbox
+
+tags=email,gis,versioning,gisimple,data exchange,geojson,geopackage,shapefile,field data,qgis4,qt6
+category=Plugins
+icon=icons/plugin.png
+experimental=True
+deprecated=False
+hasProcessingProvider=no
+
+changelog=0.9.0
+          - Initial release of the plugin.

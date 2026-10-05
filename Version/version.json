@@ -1,0 +1,8 @@
+{
+    "version": "0.9.0",
+    "name": "GeoInbox",
+    "description": "QGIS Plugin for GIS data exchange via email and versioning",
+    "author": "GIS Innovation Sdn. Bhd.",
+    "website": "https://www.GIS.com.my",
+    "release_date": "2026-04-09"
+}
